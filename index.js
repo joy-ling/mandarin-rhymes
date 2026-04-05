@@ -1,5 +1,5 @@
 const pinyinConvert = require('hanzi-to-pinyin');
-const zhuyinify = require('zhuyin');
+const zhuyinify = require('zhuyin').default;
 const hanziFrequency = require("@zurawiki/hanzi");
 const rhymingDictionary = require('./rhyming-dictionary.json');
 
@@ -106,6 +106,19 @@ class MandarinRhymes {
     }
     // reset syntactic sugar fields to initial value for use in subsequent calls
     this.matchTones = false;
+
+    // Convert definitions arrays to strings for easier display
+    this.rhymes = this.rhymes.map(word => {
+      return {
+        ...word,
+        definitions: Array.isArray(word.definitions) ? word.definitions.join('; ') : word.definitions
+      };
+    });
+
+    // Also convert self definitions
+    if (this.self.definitions && Array.isArray(this.self.definitions)) {
+      this.self.definitions = this.self.definitions.join('; ');
+    }
 
     return {
       self: this.self,
