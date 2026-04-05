@@ -14,8 +14,9 @@ Given a search phrase comprised of Chinese Characters, finds a list of rhyming w
 
 ## Usage
 
+From the root folder, run:
 ```javascript
-const MandarinRhymes = require('mandarin-rhymes')
+const MandarinRhymes = require('./index.js');
 var rhyme = new MandarinRhymes('能力');
 ```
 ### Without Tone Matching
